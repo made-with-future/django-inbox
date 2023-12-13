@@ -10,11 +10,6 @@ import django
 def runtests():
     os.environ['DJANGO_SETTINGS_MODULE'] = 'tests.settings'
 
-    # Create migrations
-    from django.core.management import execute_from_command_line
-    args = ['django', 'makemigrations']
-    execute_from_command_line(args)
-
     django.setup()
     TestRunner = get_runner(settings)
     test_runner = TestRunner()

@@ -62,68 +62,23 @@ class ClientHelperMixin(object):
             self.validate(response.data, schema)
 
     def get(self, path, data=None, follow=False, secure=False, **extra):
-        print('***' * 15)
-        print('GET {}'.format(path))
-        print('Authenticated' if '_auth_user_id' in self.client.session else 'Not Authenticated')
-        response = self.client.get(path=path, data=data, follow=follow, secure=secure, **extra)
-        print('Response status code: {}'.format(response.status_code))
-        if hasattr(response, 'data'):
-            print('Response body:')
-            print(json.dumps(response.data))
-        return response
+        return self.client.get(path=path, data=data, follow=follow, secure=secure, **extra)
 
     def post(self, path, data=None, content_type=None, follow=False, secure=False, **extra):
-        print('***' * 15)
-        print('POST {}'.format(path))
-        print('Authenticated' if '_auth_user_id' in self.client.session else 'Not Authenticated')
-        print('Request body:')
-        print(json.dumps(data))
-        response = self.client.post(path=path, data=data, content_type=content_type, follow=follow, secure=secure,
+        return self.client.post(path=path, data=data, content_type=content_type, follow=follow, secure=secure,
                                     **extra)
-        print('Response status code: {}'.format(response.status_code))
-        print('Response body:')
-        if response.status_code not in (204, 404):
-            print(json.dumps(response.data))
-        return response
 
     def patch(self, path, data=None, content_type=None, follow=False, secure=False, **extra):
-        print('***' * 15)
-        print('PATCH {}'.format(path))
-        print('Authenticated' if '_auth_user_id' in self.client.session else 'Not Authenticated')
-        print('Request body:')
-        print(json.dumps(data))
-        response = self.client.patch(path=path, data=data, content_type=content_type, follow=follow, secure=secure,
+        return self.client.patch(path=path, data=data, content_type=content_type, follow=follow, secure=secure,
                                      **extra)
-        print('Response status code: {}'.format(response.status_code))
-        print('Response body:')
-        print(json.dumps(response.data))
-        return response
 
     def put(self, path, data=None, content_type=None, follow=False, secure=False, **extra):
-        print('***' * 15)
-        print('PUT {}'.format(path))
-        print('Authenticated' if '_auth_user_id' in self.client.session else 'Not Authenticated')
-        print('Request body:')
-        print(json.dumps(data))
-        response = self.client.put(path=path, data=data, content_type=content_type, follow=follow, secure=secure,
+        return self.client.put(path=path, data=data, content_type=content_type, follow=follow, secure=secure,
                                    **extra)
-        print('Response status code: {}'.format(response.status_code))
-        print('Response body:')
-        print(json.dumps(response.data))
-        return response
 
     def delete(self, path, data=None, content_type=None, follow=False, secure=False, **extra):
-        print('***' * 15)
-        print('DELETE {}'.format(path))
-        print('Authenticated' if '_auth_user_id' in self.client.session else 'Not Authenticated')
-        print('Request body:')
-        print(json.dumps(data))
-        response = self.client.delete(path=path, data=data, content_type=content_type, follow=follow, secure=secure,
+        return self.client.delete(path=path, data=data, content_type=content_type, follow=follow, secure=secure,
                                       **extra)
-        print('Response status code: {}'.format(response.status_code))
-        print('Response body:')
-        print(json.dumps(response.data))
-        return response
 
 
 class TestCase(HTTPStatusTestCaseMixin, ClientHelperMixin, APITestCase):

@@ -1,0 +1,51 @@
+version: "3.9"
+
+services:
+  db:
+    container_name: django-inbox-db
+    image: postgres:12.0
+    user: postgres
+    volumes:
+      - ./.docker/volumes/db:/var/lib/postgresql/data
+    environment:
+      - PGDATA=/var/lib/postgresql/data/pgdata
+      - POSTGRES_DB=inbox
+      - POSTGRES_USER=inbox
+      - POSTGRES_PASSWORD=password
+    ports:
+      - "5432:5432"
+  inbox:
+    &inbox
+    container_name: django-inbox
+    image: python:3.9
+    working_dir: /code
+    tty: true
+    volumes:
+      - .:/code
+    depends_on:
+      - db
+  inbox-django-2.2:
+    <<: *inbox
+    container_name: django-inbox-django-2.2
+    environment:
+      - DJANGO_VERSION=2.2,<3.0
+    entrypoint: /code/entrypoint.sh
+  inbox-django-3:
+    <<: *inbox
+    container_name: django-inbox-django-3
+    environment:
+      - DJANGO_VERSION=3.0,<4.0
+    entrypoint: /code/entrypoint.sh
+  inbox-django-4:
+    <<: *inbox
+    container_name: django-inbox-django-4
+    environment:
+      - DJANGO_VERSION=4.0,<5.0
+    entrypoint: /code/entrypoint.sh
+  inbox-django-5:
+    <<: *inbox
+    image: python:3.10
+    container_name: django-inbox-django-5
+    environment:
+      - DJANGO_VERSION=5.0,<6.0
+    entrypoint: /code/entrypoint.sh

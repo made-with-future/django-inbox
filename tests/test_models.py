@@ -425,7 +425,6 @@ class MessageTestCase(InboxTestCaseMixin, TestCase):
         message_2 = Message.objects.create(user=self.user, key='default', message_id='placebo', fail_silently=False)
 
         self.assertEqual(message.message_id, str(uuid4))
-        print(uuid4)
 
         message = Message.objects.filter(message_id__iregex=r'^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}').first()
 

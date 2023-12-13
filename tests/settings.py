@@ -1,7 +1,6 @@
 import os
 
 from django.utils import timezone
-
 from inbox.constants import MessageMedium
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -54,7 +53,7 @@ DATABASES = {
         'NAME': 'inbox',
         'USER': 'inbox',
         'PASSWORD': 'password',
-        'HOST': 'localhost',
+        'HOST': 'db',
         'PORT': ''
     },
 }
